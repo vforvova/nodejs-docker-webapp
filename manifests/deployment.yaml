@@ -26,7 +26,7 @@ spec:
       annotations:
     spec:
       containers:
-        - image: gcr.io/unity-ads-workshop-test/vova-nodejs-docker-webapp:master
+        - image: gcr.io/unity-ads-workshop-test/vova-nodejs-docker-webapp:REVISION
           name: vova-nodejs-docker-webapp
           imagePullPolicy: Always
           resources:
@@ -42,3 +42,22 @@ spec:
 
       nodeSelector:
         cloud.google.com/gke-nodepool: workshop-pool
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: vova-nodejs-docker-webapp
+  name: vova-nodejs-docker-webapp
+  namespace: workshop
+
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: vova-nodejs-docker-webapp
