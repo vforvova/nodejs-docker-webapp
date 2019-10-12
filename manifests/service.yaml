@@ -1,5 +1,5 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   labels:
     app: rasmus-nodejs-docker-webapp
@@ -7,7 +7,7 @@ metadata:
   namespace: workshop
 
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: http
       port: 8080
