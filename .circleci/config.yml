@@ -37,10 +37,10 @@ jobs:
             docker build -t ${image}:${CIRCLE_SHA1} .
             docker push ${image}:${CIRCLE_SHA1}
 
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker tag ${image}:${CIRCLE_SHA1} ${image}:master
               docker push ${image}:master
-            fi
+            # fi
 
   deploy:
     description: Deploy service to Google Kubernetes Engine
@@ -73,16 +73,15 @@ jobs:
 
             kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb --port=8080
             kubectl get all -n ${namespace} | grep ${service}
-            kubectl describe -n ${namespace} service/${service}-lb || true
 
 workflows:
   build_update_deploy:
     jobs:
       - build
       - deploy:
-          filters:
-            branches:
-              only:
-                - master
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
           requires:
             - build

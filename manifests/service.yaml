@@ -12,6 +12,5 @@ spec:
     - name: http
       port: 8080
       protocol: TCP
-      targetPort: 8080
   selector:
     app: rasmus-nodejs-docker-webapp
