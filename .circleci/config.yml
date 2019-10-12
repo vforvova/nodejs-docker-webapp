@@ -66,7 +66,7 @@ jobs:
             if kubectl get service ${service}-lb -n ${namespace} > /dev/null; then
               kubectl delete service ${service}-lb -n ${namespace};
             fi
-            cat ./manifests/deployment.yaml | sed 's/REVISION/\"$CIRCLECI_SHA1\"/' | kubectl apply -f -
+            cat ./manifests/deployment.yaml | sed 's/REVISION/${CIRCLECI_SHA1}/' | kubectl apply -f -
             kubectl expose deployment -n ${namespace} ${service} --type=LoadBalancer --name=${service}-lb --port=8080
             kubectl get all -n ${namespace} | grep ${service}
 
