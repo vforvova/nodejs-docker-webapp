@@ -2,8 +2,8 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: rasmus-nodejs-docker-webapp
-  name: rasmus-nodejs-docker-webapp
+    app: vova-nodejs-docker-webapp
+  name: vova-nodejs-docker-webapp
   namespace: workshop
 
 spec:
@@ -14,4 +14,4 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: rasmus-nodejs-docker-webapp
+    app: vova-nodejs-docker-webapp

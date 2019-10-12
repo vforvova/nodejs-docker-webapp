@@ -2,26 +2,32 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: workshop
-  name: rasmus-nodejs-docker-webapp
+  name: vova-nodejs-docker-webapp
   labels:
-    app: rasmus-nodejs-docker-webapp
+    app: vova-nodejs-docker-webapp
 
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
   selector:
     matchLabels:
-      app: rasmus-nodejs-docker-webapp
+      app: vova-nodejs-docker-webapp
 
   template:
     metadata:
       labels:
-        app: rasmus-nodejs-docker-webapp
+        app: vova-nodejs-docker-webapp
       annotations:
     spec:
       containers:
-        - image: gcr.io/unity-ads-workshop-test/rasmus-nodejs-docker-webapp:master
-          name: rasmus-nodejs-docker-webapp
+        - image: gcr.io/unity-ads-workshop-test/vova-nodejs-docker-webapp:master
+          name: vova-nodejs-docker-webapp
           imagePullPolicy: Always
           resources:
             requests:
